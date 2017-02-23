@@ -1,0 +1,34 @@
+<cjw-tool-box title="{{'Search'|i18n:'content'}}">
+    <ezp-search-box />
+</cjw-tool-box>
+
+<cjw-tool-box title="{{'Content structure'|i18n:'content'}}">
+    <div id="treemenu" ng-controller="ezpTreemenuCtrl as tree">
+        <ul dx-start-with="tree.rootNode as prior">
+            <li ng-repeat="node in prior.children" ng-class="{'treemenu-depth': node.depth>=4}">
+                <span ng-if="node.name && !node.count" class="fa fa-square-o"></span>
+                <span ng-if="::node.count" class="pointer fa" ng-click="::tree.setNode(prior,$index,node.request)" ng-class="{'fa-plus-square-o': !node.active, 'fa-minus-square-o': node.active}"></span>
+                <a ng-if="::node.name" ng-href="{{::node.href|getapproute:location}}" title="{{::node.name}}">{{::node.name}}</a>
+                <ul dx-connect="node" />
+            </li>
+        </ul>
+    </div>
+</cjw-tool-box>
+
+<cjw-tool-box title="{{'Bookmarks'|i18n:'content'}}">
+    <cjw-bookmarks />
+</cjw-tool-box>
+
+<cjw-tool-box title="{{'My settings'|i18n:'content'}}">
+    <ul>
+        <li>Change password</li>
+        <li>Edit profile</li>
+        <li>Switch locale</li>
+    </ul>
+</cjw-tool-box>
+
+<cjw-tool-box title="{{'Multiupload'|i18n:'content'}}">
+    <ul>
+        <li>multiupload</li>
+    </ul>
+</cjw-tool-box>

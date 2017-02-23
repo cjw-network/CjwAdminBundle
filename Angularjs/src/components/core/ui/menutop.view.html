@@ -1,0 +1,7 @@
+<ul id="menutop" ng-if="menutop.appHasMenuTop">
+    <li ng-repeat="item in menutop.navigationParts">
+        <a ng-if="!item.self" class="color_red" ng-class="{'underline': $index==menutop.selectedItem}" ng-click="::menutop.selection($index,item)" ng-href="{{menutop.pathPrefix}}{{::item.href}}">{{::item.name|i18n:'ui'}}</a>
+        <a ng-if="::item.self" class="color_red" ng-href="{{::menutop.pathPrefix}}{{::item.href}}" target="_self">{{::item.name|i18n:'ui'}}</a>
+    </li>
+</ul>
+<div class="break"></div>

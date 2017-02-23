@@ -1,0 +1,18 @@
+<div class="ezp-contenttype-groups">
+    <ul>
+        <li>
+            <strong>
+                <a ng-href="{{::contenttypeGroups.pathPrefix}}/contenttypes">{{'Show all contenttypes'|i18n:'contenttypes'}}</a>
+            </strong>
+        </li>
+        <li ng-if="contenttypeGroups.groupList" ng-repeat="group in contenttypeGroups.groupList">
+            <span class="pointer fa fa-times fa-lg" ng-click="::contenttypeGroups.removeGroup(group.id)"></span>
+            <span class="pointer fa fa-pencil-square-o fa-lg" ng-click="::contenttypeGroups.editGroup(group.id)"></span>
+            <a ng-href="{{::contenttypeGroups.pathPrefix}}/contenttypes/group/{{group.id}}">{{group.identifier}}</a>
+        </li>
+    </ul>
+    <input style="width: 95%;margin: 0.5rem 0 0 0;" ng-model="contenttypeGroups.newGroupIdentifier" placeholder="{{'New group identifier'|i18n:'contenttypes'}}" />
+    <button style="width: 95%;margin-top: 0.5rem;" ng-click="::contenttypeGroups.createGroup()">
+        {{'Add new group'|i18n:'contenttypes'}}
+    </button>
+</div>

@@ -1,0 +1,13 @@
+<h1>{{'Search content'|i18n:'content'}}</h1>
+
+<table>
+    <tr ng-repeat="item in contentsearch.searchHits" ng-class-odd="'odd'" ng-class-even="'even'">
+        <td>
+            <a ng-href="{{item.PathString.substring(0, item.PathString.length-1)|getapproute}}">
+                {{item.Name}}
+            </a>
+        </td>
+        <td>{{item.ClassName}}</td>
+        <td>{{item.CurrentLanguage}}</td>
+    </tr>
+</table>

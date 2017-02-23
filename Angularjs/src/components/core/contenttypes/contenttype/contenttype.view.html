@@ -1,0 +1,64 @@
+<button class="right" ng-click="::contenttype.showModalRemove()">{{'Remove'|i18n:'contenttypes'}}</button>
+<button class="right" ng-click="::contenttype.showModalUpdate()">{{'Edit'|i18n:'contenttypes'}}</button>
+<select class="right">
+    <option value="{{::contenttype.mainLanguageCode}}" selected>{{::contenttype.mainLanguageCode}}</option>
+</select>
+
+<h1 ng-if="contenttype.definition.names.value">{{contenttype.definition.names.value|translatevalue}}</h1>
+<p ng-if="contenttype.definition.descriptions.value">{{contenttype.definition.descriptions.value|translatevalue}}</p>
+
+<p>ToDo: modified, groups, status, translations, has access</p>
+
+<h2>{{'Features'|i18n:'contenttypes'}}:</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>{{'Identifier'|i18n:'contenttypes'}}</th>
+            <th>{{'Id'|i18n:'contenttypes'}}</th>
+            <th>{{'Container'|i18n:'contenttypes'}}</th>
+            <th>{{'Default availablity'|i18n:'contenttypes'}}</th>
+            <th>{{'Default sort order'|i18n:'contenttypes'}}</th>
+            <th>{{'Object name schema'|i18n:'contenttypes'}}</th>
+        <tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{contenttype.definition.identifier}}</td>
+            <td>{{::contenttype.definition.id}}</td>
+            <td>{{contenttype.definition.isContainer|i18n:'contenttypes'}}</td>
+            <td>{{contenttype.definition.defaultAlwaysAvailable|i18n:'contenttypes'}}</td>
+            <td>{{contenttype.definition.defaultSortField}} {{contenttype.definition.defaultSortOrder}}</td>
+            <td>{{contenttype.definition.nameSchema}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>{{'Fields'|i18n:'contenttypes'}}:</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>{{'Id'|i18n:'contenttypes'}}</th>
+            <th>{{'Name'|i18n:'contenttypes'}}</th>
+            <th>{{'Identifier'|i18n:'contenttypes'}}</th>
+            <th>{{'Fieldtype'|i18n:'contenttypes'}}</th>
+            <th>{{'Requi'|i18n:'contenttypes'}}</th>
+            <th>{{'Searc'|i18n:'contenttypes'}}</th>
+            <th>{{'Infoc'|i18n:'contenttypes'}}</th>
+            <th>{{'Trans'|i18n:'contenttypes'}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="fieldtype in contenttype.definition.FieldDefinitions.FieldDefinition" ng-class-odd="'odd'" ng-class-even="'even'">
+            <td>{{::fieldtype.id}}</td>
+            <td>{{fieldtype.names.value|translatevalue}}</td>
+            <td>{{fieldtype.identifier}}</td>
+            <td>{{fieldtype.fieldType|i18n:'contenttypes'}}</td>
+            <td>{{fieldtype.isRequired|i18n:'contenttypes'}}</td>
+            <td>{{fieldtype.isSearchable|i18n:'contenttypes'}}</td>
+            <td>{{fieldtype.isInfoCollector|i18n:'contenttypes'}}</td>
+            <td>{{fieldtype.isTranslatable|i18n:'contenttypes'}}</td>
+        </tr>
+    </tbody>
+</table>

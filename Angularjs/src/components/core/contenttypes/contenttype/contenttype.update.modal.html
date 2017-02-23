@@ -1,0 +1,93 @@
+<ezp-modal-layout />
+
+<form id="contenttype-edit" class="modal-animate" ng-if="animate">
+    <div id="modal-overlay-box">
+        <h1 class="left">{{'Edit'|i18n:'contenttypes'}} [{{contenttype.definition.names.value|translatevalue}}]</h1>
+        <button class="right" ng-click="::close(false)">{{'Cancel'|i18n:'contenttypes'}}</button>
+        <button class="right" ng-click="::contenttype.publish()">{{'Publish'|i18n:'contenttypes'}}</button>
+
+        <div class="break"></div>
+        <hr />
+
+        <div class="halfbox left">
+            <p><strong>{{'Name'|i18n:'contenttypes'}}:</strong><p>
+            <input class="box" ng-model="contenttype.definition.names.value[0]['#text']" required />
+        </div>
+
+        <div class="halfbox right">
+            <p><strong>{{'Identifier'|i18n:'contenttypes'}}:</strong><p>
+            <input class="box" ng-model="contenttype.definition.identifier" required />
+        </div>
+
+        <div class="halfbox left">
+            <p><strong>{{'Object name schema'|i18n:'contenttypes'}}:</strong><p>
+            <input class="box" ng-model="contenttype.definition.nameSchema" required />
+        </div>
+
+        <div class="halfbox right">
+            <p><strong>{{'Features'|i18n:'contenttypes'}}:</strong><p>
+            <p>
+                <input class="inline" type="checkbox" ng-model="contenttype.definition.isContainer" />
+                <strong>{{'Container'|i18n:'contenttypes'}}</strong> &nbsp;&nbsp;
+                <input class="inline" type="checkbox" ng-model="contenttype.definition.defaultAlwaysAvailable" />
+                <strong>{{'Default availablity'|i18n:'contenttypes'}}</strong>
+            </p>
+            <p></p>
+        </div>
+
+        <div class="break"></div>
+
+        <p><strong>{{'Description'|i18n:'contenttypes'}}:</strong><p>
+        <input class="box" ng-model="contenttype.definition.descriptions.value[0]['#text']" />
+
+        <p>
+            <strong>
+                [<a href ng-click="::contenttype.fieldsCollapseExpand(true)">Collapse all|i18n</a>]
+                &nbsp;&nbsp;
+                [<a href ng-click="::contenttype.fieldsCollapseExpand(false)">Expand all|i18n</a>]
+            </strong>
+        </p>
+
+        <div class="fielddefinition" ng-repeat="fieldtype in ::contenttype.definition.FieldDefinitions.FieldDefinition">
+            <h2 class="pointer fielddefinition-head" ng-click="::contenttype.fieldHide(fieldtype.id)">
+                {{fieldtype.position}}. {{fieldtype.names.value|translatevalue}} [{{fieldtype.fieldType|i18n:'contenttypes'}}] ({{'Id'|i18n:'contenttypes'}}:{{::fieldtype.id}})
+            </h2>
+
+            <div class="fielddefinition-body" ng-class="{'show': !contenttype.fieldsInactive[fieldtype.id], 'hide': contenttype.fieldsInactive[fieldtype.id]}">
+                <div class="halfbox left">
+                    <p><strong>{{'Name'|i18n:'contenttypes'}}:</strong><p>
+                    <input class="box" ng-model="fieldtype.names.value[0]['#text']" required />
+                </div>
+
+                <div class="halfbox right">
+                    <p><strong>{{'Identifier'|i18n:'contenttypes'}}:</strong><p>
+                    <input class="box" ng-model="fieldtype.identifier" required />
+                </div>
+
+                <div class="break"></div>
+
+                <p><strong>{{'Description'|i18n:'contenttypes'}}:</strong><p>
+                <input class="box" ng-model="fieldtype.descriptions.value[0]['#text']" />
+
+                <p><strong>{{'Features'|i18n:'contenttypes'}}:</strong><p>
+                <p>
+                    <input class="inline" type="checkbox" ng-model="fieldtype.isRequired" /> <strong>{{'Required'|i18n:'contenttypes'}}</strong> &nbsp;&nbsp;
+                    <input class="inline" type="checkbox" ng-model="fieldtype.isSearchable" /> <strong>{{'Searchable'|i18n:'contenttypes'}}</strong> &nbsp;&nbsp;
+                    <input class="inline" type="checkbox" ng-model="fieldtype.isInfoCollector" /> <strong>{{'Infocollector'|i18n:'contenttypes'}}</strong> &nbsp;&nbsp;
+                    <input class="inline" type="checkbox" ng-model="fieldtype.isTranslatable" /> <strong>{{'Translatable'|i18n:'contenttypes'}}</strong> &nbsp;&nbsp;
+                </p>
+            </div>
+        </div>
+
+        <button class="right" ng-click="::close(false)">{{'Cancel'|i18n:'contenttypes'}}</button>
+        <button class="right" ng-click="::contenttype.publish()">{{'Publish'|i18n:'contenttypes'}}</button>
+
+        <select>
+            <option ng-repeat="fieldType in ::contenttype.FieldTypeList">{{fieldType|i18n:'contenttypes'}}</option>
+        </select>
+        <button class="leftt">Add field|i18n</button>
+
+        <div class="break"></div>
+    </div>
+    <div ng-click="::close(false)" id="modal-overlay-fade"></div>
+</form>

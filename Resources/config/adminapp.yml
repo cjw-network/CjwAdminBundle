@@ -1,0 +1,67 @@
+cjwadminapp_settings:
+# ToDo: den componenten zuordnen?
+    content_structure_menu:
+        show_classes: []        # ToDo
+        max_nodes: 150          # ToDo
+        root_location_id: 2     # ToDo ?
+    browse_control: false       # ToDo
+    image_settings:
+        default_image_variation: 'medium'
+    cache_settings:
+        locations: true,
+        location_children: true,
+        object_properties: true
+    language_settings:
+        available_languages: []
+        default_language: [ 'eng-GB', 'en' ]
+    locale_settings:
+        available_locales: []
+        default_locale: [ 'eng-GB', 'en' ]
+
+# client side route overrides
+# debugging
+# enabling / disabling modules
+# enabling / disabling client side caching
+# default image variation
+# extra translations ?
+
+cjwadminapp_navigationparts:
+    dashboard:
+        enabled: false
+        name: Dashboard
+    location_content:
+        enabled: true
+        name: Content
+        href: /location/1-2
+    location_media:
+        enabled: true
+        name: Media
+        href: /location/1-43
+    location_users:
+        enabled: true
+        name: User
+        href: /location/1-5
+    policies:
+        enabled: true
+        name: Roles
+        href: /roles
+    content_types:
+        enabled: true
+        name: Classes
+        href: /contenttypes
+    setup:
+        enabled: true
+        name: Setup
+        href: /setup
+        rest_route: /adminapp/setup     # test for injecting an rest method / controller in this app module
+    barebone:
+# ToDo: top / leftmenu ?
+        enabled: false
+        name: Example
+#            names:
+#                en: Example
+#                de: Beispiel
+        href: /example
+#        controller: BareboneController     # ToDo: routing ?
+#        component: example
+#        rest_route: /adminapp/example

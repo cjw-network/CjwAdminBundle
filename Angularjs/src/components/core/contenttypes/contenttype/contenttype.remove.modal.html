@@ -1,0 +1,19 @@
+<ezp-modal-layout />
+
+<form id="content-remove" class="modal-animate" ng-if="animate">
+    <div id="modal-overlay-box">
+        <h1 class="left" ng-bind="::content.name"></h1>
+        <button class="right" ng-click="::close(false)">{{'Close'|i18n:'content'}}</button>
+        <button class="right" ng-click="::remove()">{{'Remove'|i18n:'content'}}</button>
+
+        <div class="break"></div>
+
+        <p>ToDo:</p>
+
+        <button class="right" ng-click="::close(false)">{{'Close'|i18n:'content'}}</button>
+        <button class="right" ng-click="::remove()">{{'Remove'|i18n:'content'}}</button>
+
+        <div class="break"></div>
+    </div>
+    <div ng-click="::close(false)" id="modal-overlay-fade"></div>
+</form>

@@ -1,0 +1,38 @@
+<div ng-if="children.hasChildren" id="location-children">
+    <h1>children ({{children.hasChildren}})</h1>
+    <div class="break"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>{{'Name'|i18n:'content'}}</th>
+                <th>{{'Language'|i18n:'content'}}</th>
+                <th>{{'Hidden'|i18n:'content'}}</th>
+                <!--th>invisible</th-->
+                <th>{{'Section'|i18n:'content'}}</th>
+                <th>{{'Contentype'|i18n:'content'}}</th>
+                <th>{{'Modified'|i18n:'content'}}</th>
+                <th>{{'Published'|i18n:'content'}}</th>
+                <th>{{'Priority'|i18n:'content'}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in children.locations" ng-class-odd="'odd'" ng-class-even="'even'">
+                <td>
+                    <a ng-href="{{::item['_href']|getapproute}}">{{::item.name}}</a>
+                </td>
+                <td>
+                    <a ng-href="{{::item['_href']|getapproute}}" ng-repeat="laguageCode in ::getLanguageCodes(item.languageCodes)">
+                        <img class="flag-icon" ng-src="{{::pathAssets}}/images/flags/{{::laguageCode}}.gif" />
+                    </a>
+                </td>
+                <td>{{::item.hidden|i18n:'content'}}</td>
+                <!--td>{{::item.invisible}}</td-->
+                <td>{{::item.sectionId|sectionname}}</td>
+                <td>{{::item.contentType|contenttypename}}</td>
+                <td>{{::item.modificationDate|date:short}}</td>
+                <td>{{::item.publishedDate|date:short}}</td>
+                <td>{{::item.priority}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

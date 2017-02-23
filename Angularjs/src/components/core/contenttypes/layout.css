@@ -1,0 +1,21 @@
+#contenttype-edit p { margin: 0 0 0.33rem 0; }
+
+.fielddefinition-head {
+    padding: 0.2em 0.66em;
+    margin: 0;
+    color: white;
+    background-color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fielddefinition-body {
+    padding: 0.66em 0.66em 0 0.66em;
+    border: 1px solid darkgrey;
+}
+
+.fielddefinition {
+    background-color: #f9f9f9;
+    margin-bottom: 0.75em;
+}

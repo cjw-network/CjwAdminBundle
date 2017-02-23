@@ -1,0 +1,119 @@
+<?php
+
+namespace Cjw\AdminAppBundle\Rest\ValueObjectVisitor;
+
+use eZ\Publish\Core\REST\Common\Output\ValueObjectVisitor;
+use eZ\Publish\Core\REST\Common\Output\Generator;
+use eZ\Publish\Core\REST\Common\Output\Visitor;
+use eZ\Publish\Core\REST\Common\Output\FieldTypeSerializer;
+use eZ\Publish\Core\REST\Server\Values\RelationList as RelationListValue;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\API\Repository\Values\Content\Field;
+/**
+ * Version value object visitor.
+ */
+class Version extends ValueObjectVisitor
+{
+    /**
+     * @var \eZ\Publish\Core\REST\Common\Output\FieldTypeSerializer
+     */
+    protected $fieldTypeSerializer;
+    /**
+     * @param \eZ\Publish\Core\REST\Common\Output\FieldTypeSerializer $fieldTypeSerializer
+     */
+    public function __construct(FieldTypeSerializer $fieldTypeSerializer)
+    {
+        $this->fieldTypeSerializer = $fieldTypeSerializer;
+    }
+    /**
+     * Visit struct returned by controllers.
+     *
+     * @param \eZ\Publish\Core\REST\Common\Output\Visitor $visitor
+     * @param \eZ\Publish\Core\REST\Common\Output\Generator $generator
+     * @param \eZ\Publish\Core\REST\Server\Values\Version $data
+     */
+    public function visit(Visitor $visitor, Generator $generator, $data)
+    {
+        $content = $data->content;
+        $versionInfo = $content->getVersionInfo();
+        $contentType = $data->contentType;
+        $generator->startObjectElement('Version');
+        $visitor->setHeader('Content-Type', $generator->getMediaType('Version'));
+        $visitor->setHeader('Accept-Patch', $generator->getMediaType('VersionUpdate'));
+        $path = $data->path;
+        if ($path == null) {
+            $path = $this->router->generate(
+                'ezpublish_rest_loadContentInVersion',
+                array(
+                    'contentId' => $content->id,
+                    'versionNumber' => $versionInfo->versionNo,
+                )
+            );
+        }
+        $generator->startAttribute('href', $path);
+        $generator->endAttribute('href');
+        $visitor->visitValueObject($versionInfo);
+        $generator->startHashElement('Fields');
+        $generator->startList('field');
+        foreach ($content->getFields() as $field) {
+// this is a real hardcore hack (will solve this later)
+// https://github.com/ezsystems/ezpublish-kernel/pull/1321
+            if ($data->languages !== null)
+            {
+                if ( in_array( $field->languageCode, $data->languages ) )
+                {
+                    $this->visitField($generator, $contentType, $field);
+                }
+            }
+            else
+            {
+                $this->visitField($generator, $contentType, $field);
+            }
+        }
+        $generator->endList('field');
+        $generator->endHashElement('Fields');
+        $visitor->visitValueObject(
+            new RelationListValue(
+                $data->relations,
+                $content->id,
+                $versionInfo->versionNo
+            )
+        );
+        $generator->endObjectElement('Version');
+    }
+    /**
+     * Visits a single content field and generates its content.field
+     *
+     * @param \eZ\Publish\Core\REST\Common\Output\Generator $generator
+     * @param \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType
+     * @param \eZ\Publish\API\Repository\Values\Content\Field $field
+     */
+    public function visitField(Generator $generator, ContentType $contentType, Field $field)
+    {
+        $generator->startHashElement('field');
+        $generator->startValueElement('id', $field->id);
+        $generator->endValueElement('id');
+        $generator->startValueElement('fieldDefinitionIdentifier', $field->fieldDefIdentifier);
+        $generator->endValueElement('fieldDefinitionIdentifier');
+        $generator->startValueElement('languageCode', $field->languageCode);
+        $generator->endValueElement('languageCode');
+        foreach ($contentType->fieldDefinitions as $definition)
+        {
+            if ($definition->identifier == $field->fieldDefIdentifier)
+            {
+                $generator->startValueElement('fieldTypeIdentifier', $definition->fieldTypeIdentifier);
+                $generator->endValueElement('fieldTypeIdentifier');
+                $generator->startValueElement('isRequired', $definition->isRequired);
+                $generator->endValueElement('isRequired');
+                $generator->startValueElement('isInfoCollector', $definition->isInfoCollector);
+                $generator->endValueElement('isInfoCollector');
+            }
+        }
+        $this->fieldTypeSerializer->serializeFieldValue(
+            $generator,
+            $contentType,
+            $field
+        );
+        $generator->endHashElement('field');
+    }
+}

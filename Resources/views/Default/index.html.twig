@@ -1,0 +1,33 @@
+{% verbatim %}<!doctype html>
+<html lang="de">
+<!--html lang="de" ng-app="ezpAppCore" manifest="/offline.appcache"-->
+    <head>
+        <base href="/">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>CJW Admin App for eZ Publish</title>
+        <meta name="description" content="CJW Admin App. A technology study for an AngularJS/REST based backend for eZ Publish and eZ Platform." />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <link href="/bundles/cjwadminapp/css/app.min.css" type="text/css" rel="stylesheet" />
+        <!--link href="/bundles/cjwadminapp/css/extensions.min.css" type="text/css" rel="stylesheet" /-->
+        <script src="/bundles/cjwadminapp/js/angular.min.js"></script>
+        <script src="/bundles/cjwadminapp/js/app.min.js"></script>
+        <!--script src="/bundles/cjwadminapp/js/extensions.min.js"></script-->
+        <style type="text/css">
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+            }
+        </style>
+    </head>
+    <body ng-app="ezpAppCore" ng-strict-di ng-cloak>
+        <ezp-messages></ezp-messages>
+        <ezp-menu-top></ezp-menu-top>
+        <ezp-sidebar></ezp-sidebar>
+        <div class="ng-view right"></div>
+        <div class="break"></div>
+    </body>
+</html>{% endverbatim %}

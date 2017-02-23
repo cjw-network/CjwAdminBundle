@@ -1,0 +1,8 @@
+#location-children h1 { margin-bottom: 1rem; }
+
+#content-view table th,
+#content-create table th,
+#content-edit table th {
+    background: #f9f9f9;
+    width: 15%;
+}

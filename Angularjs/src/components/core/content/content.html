@@ -1,0 +1,22 @@
+<p ng-if="content.parentLocation" id="content-location-path" style="margin: 0 0 1em 0;">
+    {{'You are here'|i18n:'content'}}:
+    <strong>
+        <ezp-location-path pathstring="content.location.pathString"></ezp-location-path>
+    </strong>
+</p>
+
+<button ng-if="content.canContentEdit" class="right" ng-click="::showModalEdit()">{{'Edit'|i18n:'content'}}</button>
+<button ng-if="content.canContentMove" class="right" ng-click="::showModalMove()">{{'Move'|i18n:'content'}}</button>
+<button ng-if="content.canContentRemove" class="right" ng-click="::showModalRemove()">{{'Remove'|i18n:'content'}}</button>
+
+<ezp-content-view id="content-view" ng-if="content.location.Content" request="content.location.Content" language="content.location.mainLanguageCode" parent="content.location.pathString.slice(0, -1)"></ezp-content-view>
+
+<button ng-if="content.canContentCreate" class="right" ng-click="::showModalCreate()">{{'Create'|i18n:'content'}}</button>
+<select ng-if="content.canContentCreate" class="right" ng-model="content.selectedContentCreateContentType">
+    <!--option value="0"></option-->
+    <option ng-repeat="contentType in content.canContentCreate" value="{{contentType}}">
+        {{contentType|contenttypename}}
+    </option>
+</select>
+
+<ezp-location-children ng-if="content.location.childCount > 0" request="content.location.Children"></ezp-location-children>

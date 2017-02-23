@@ -1,0 +1,52 @@
+cjwadminapp_index:
+    path:     /adminapp/{var}
+    defaults: { _controller: CjwAdminAppBundle:App:index, var: '' }
+    requirements:
+        var: ".*"
+
+cjwadminapp_rest_searchContent:
+    path: %ezpublish_rest.path_prefix%/adminapp/content/search/{searchText}
+    defaults: { _controller: CjwAdminAppBundle:Search:searchContent }
+    methods: [GET]
+#    requirements:
+#        searchText: \d+
+
+cjwadminapp_rest_loadLocation:
+    path: %ezpublish_rest.path_prefix%/adminapp/content/locations/{locationPath}
+    defaults: { _controller: CjwAdminAppBundle:Rest:loadLocation }
+    methods: [GET]
+    requirements:
+        locationPath: "[0-9/]+"
+
+cjwadminapp_rest_loadLocationChildren:
+    path: %ezpublish_rest.path_prefix%/adminapp/content/locations/{locationPath}/children
+    defaults: { _controller: CjwAdminAppBundle:Rest:loadLocationChildren }
+    methods: [GET]
+    requirements:
+        locationPath: "[0-9/]+"
+
+cjwadminapp_rest_loadLocationsForContent:
+    path: %ezpublish_rest.path_prefix%/adminapp/content/objects/{contentId}/locations
+    defaults: { _controller: CjwAdminAppBundle:Rest:loadLocationsForContent }
+    methods: [GET]
+    requirements:
+        locationPath: "[0-9/]+"
+
+cjwadminapp_rest_loadContent:
+    path: %ezpublish_rest.path_prefix%/adminapp/content/objects/{contentId}
+    defaults: { _controller: CjwAdminAppBundle:Rest:loadContent }
+    methods: [GET]
+    requirements:
+        contentId: \d+
+
+cjwadminapp_session:
+    path: %ezpublish_rest.path_prefix%/adminapp/user/loggedin/{userId}
+    defaults: { _controller: CjwAdminAppBundle:Session:loggedIn }
+    methods: [GET]
+    requirements:
+        userId: \d+
+
+cjwadminapp_setup:
+    path: %ezpublish_rest.path_prefix%/adminapp/setup
+    defaults: { _controller: CjwAdminAppBundle:Setup:index }
+    methods: [GET]

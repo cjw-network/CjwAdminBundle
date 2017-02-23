@@ -1,0 +1,35 @@
+<ezp-modal-layout />
+
+<form id="contenttype-create" class="modal-animate" ng-if="animate">
+    <div id="modal-overlay-box">
+        <h1 class="left" ng-bind="::content.name"></h1>
+        <button class="right" ng-click="::close(false)">{{'Close'|i18n:'content'}}</button>
+        <button class="right" ng-click="::publish()">{{'Publish'|i18n:'content'}}</button>
+
+        <div class="break"></div>
+
+        <table>
+            <tr ng-repeat="(key,field) in ::content.fields">
+                <th ng-bind="::field.fieldDefinitionIdentifier"></th>
+                <td>
+<ezp-fieldvalue-edit-ezboolean ng-if="::field.fieldTypeIdentifier === 'ezboolean'"></ezp-fieldvalue-edit-ezboolean>
+<ezp-fieldvalue-edit-ezdatetime ng-if="::field.fieldTypeIdentifier === 'ezdatetime'"></ezp-fieldvalue-edit-ezdatetime>
+<ezp-fieldvalue-edit-ezimage ng-if="::field.fieldTypeIdentifier === 'ezimage'"></ezp-fieldvalue-edit-ezimage>
+<ezp-fieldvalue-edit-ezkeyword ng-if="::field.fieldTypeIdentifier === 'ezkeyword'"></ezp-fieldvalue-edit-ezkeyword>
+<ezp-fieldvalue-edit-ezobjectrelationlist ng-if="::field.fieldTypeIdentifier === 'ezobjectrelationlist'"></ezp-fieldvalue-edit-ezobjectrelationlist>
+<ezp-fieldvalue-edit-ezpage ng-if="::field.fieldTypeIdentifier === 'ezpage'"></ezp-fieldvalue-edit-ezpage>
+<ezp-fieldvalue-edit-ezstring ng-if="::field.fieldTypeIdentifier === 'ezstring'"></ezp-fieldvalue-edit-ezstring>
+<ezp-fieldvalue-edit-ezurl ng-if="::field.fieldTypeIdentifier === 'ezurl'"></ezp-fieldvalue-edit-ezurl>
+<ezp-fieldvalue-edit-ezuser ng-if="::field.fieldTypeIdentifier === 'ezuser'"></ezp-fieldvalue-edit-ezuser >
+<ezp-fieldvalue-edit-ezxmltext ng-if="::field.fieldTypeIdentifier === 'ezxmltext'"></ezp-fieldvalue-edit-ezxmltext>
+                </td>
+            </tr>
+        </table>
+
+        <button class="right" ng-click="::close(false)">{{'Close'|i18n:'content'}}</button>
+        <button class="right" ng-click="::publish()">{{'Publish'|i18n:'content'}}</button>
+
+        <div class="break"></div>
+    </div>
+    <div ng-click="::close(false)" id="modal-overlay-fade"></div>
+</form>

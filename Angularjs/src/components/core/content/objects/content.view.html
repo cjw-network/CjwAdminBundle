@@ -1,0 +1,156 @@
+<p>
+    {{'Languages'|i18n:'content'}}:
+    <strong ng-repeat="languageCode in ::content.VersionInfo.languageCodes.split(',')">
+        <span ng-if="languageCode === content.currentLanguageCode" ng-bind="languageCode"></span>
+        <a ng-if="languageCode !== content.currentLanguageCode" href="" ng-bind="languageCode" ng-click="::content.updateLanguageVersion(languageCode)"></a>
+    </strong>
+</p>
+
+<h1 ng-bind="content.name"></h1>
+
+<div class="break"></div>
+
+<cjw-tabset id="content_view_tabset">
+    <cjw-tab name="{{'Content'|i18n:'content'}}" id="content_view_tab_content" selected>
+        <table>
+            <tr ng-repeat="field in content.Fields">
+                <th ng-bind="field.fieldDefinitionIdentifier"></th>
+                <td>
+<ezp-fieldvalue-view-ezboolean ng-if="field.fieldTypeIdentifier === 'ezboolean'"></ezp-fieldvalue-view-ezboolean>
+<ezp-fieldvalue-view-ezdatetime ng-if="field.fieldTypeIdentifier === 'ezdatetime'"></ezp-fieldvalue-view-ezdatetime>
+<ezp-fieldvalue-view-ezimage ng-if="field.fieldTypeIdentifier === 'ezimage'"></ezp-fieldvalue-view-ezimage>
+<ezp-fieldvalue-view-ezkeyword ng-if="field.fieldTypeIdentifier === 'ezkeyword'"></ezp-fieldvalue-view-ezkeyword>
+<ezp-fieldvalue-view-ezobjectrelationlist ng-if="field.fieldTypeIdentifier === 'ezobjectrelationlist'"></ezp-fieldvalue-view-ezobjectrelationlist>
+<ezp-fieldvalue-view-ezpage ng-if="field.fieldTypeIdentifier === 'ezpage'"></ezp-fieldvalue-view-ezpage>
+<ezp-fieldvalue-view-ezstring ng-if="field.fieldTypeIdentifier === 'ezstring'"></ezp-fieldvalue-view-ezstring>
+<ezp-fieldvalue-view-ezurl ng-if="field.fieldTypeIdentifier === 'ezurl'"></ezp-fieldvalue-view-ezurl>
+<ezp-fieldvalue-view-ezuser ng-if="field.fieldTypeIdentifier === 'ezuser'"></ezp-fieldvalue-view-ezuser>
+<ezp-fieldvalue-view-ezxmltext ng-if="field.fieldTypeIdentifier === 'ezxmltext'"></ezp-fieldvalue-view-ezxmltext>
+                </td>
+            </tr>
+        </table>
+    </cjw-tab>
+
+    <cjw-tab name="{{'Details'|i18n:'content'}}" id="content_view_tab_details">
+        <table>
+            <tr>
+                <th>ID|i18n</th>
+                <td>{{::content.id}}</td>
+            </tr>
+             <tr>
+                <th>Object Remote ID|i18n</th>
+                <td>{{::content.remoteId}}</td>
+            </tr>
+             <tr>
+                <th>Published|i18n</th>
+                <td>{{content.publishedDate|date:short}}</td>
+            </tr>
+             <tr>
+                <th>Modified|i18n</th>
+                <td>{{content.lastModificationDate|date:short}}</td>
+            </tr>
+             <tr>
+                <th>Main language code|i18n</th>
+                <td>{{content.mainLanguageCode}}</td>
+            </tr>
+             <tr>
+                <th>Section, hidden, invisible, Type, isContainer</th>
+                <td>ToDo</td>
+            </tr>
+             <tr>
+                <th>Always available|i18n</th>
+                <td>{{content.alwaysAvailable}}</td>
+            </tr>
+        </table>
+    </cjw-tab>
+
+    <cjw-tab name="{{'Versions'|i18n:'content'}}" id="content_view_tab_versions">
+        <table>
+            <thead>
+                <tr>
+                    <th>{{'Version'|i18n:'content'}}</th>
+                    <th>{{'Status'|i18n:'content'}}</th>
+                    <th>{{'Published'|i18n:'content'}}</th>
+                    <th>{{'Modified'|i18n:'content'}}</th>
+                    <th>{{'Creator'|i18n:'content'}}</th>
+                    <th>{{'Language'|i18n:'content'}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="version in content.VersionList.VersionItem" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <td>{{version.VersionInfo.versionNo}}</td>
+                    <td>{{version.VersionInfo.status|i18n:'content'}}</td>
+                    <td>{{version.VersionInfo.creationDate|date:short}}</td>
+                    <td>{{version.VersionInfo.modificationDate|date:short}}</td>
+                    <td>{{version.VersionInfo.Creator|getidfromhref}}</td>
+                    <td>{{version.VersionInfo.languageCodes}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </cjw-tab>
+
+    <cjw-tab name="{{'Locations'|i18n:'content'}}" id="content_view_tab_locations">
+        <table>
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th style="width: 90%">{{'Location'|i18n:'content'}}</th>
+                    <th>{{'Children'|i18n:'content'}}</th>
+                    <th>{{'Hidden'|i18n:'content'}}</th>
+                    <th>{{'Main location'|i18n:'content'}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="location in content.LocationList.Location" ng-class-odd="'odd'" ng-class-even="'even'">
+                    <td>
+                        <input type="checkbox" ng-if="location['_href'] === content.MainLocationHref" ng-class="{'radio': !content.multi}" disabled />
+                        <input type="checkbox" ng-if="location['_href'] !== content.MainLocationHref" ng-model="location.selected" ng-click="::content.setLocationSelection($index)" ng-class="{'radio': !content.multi}" />
+                    </td>
+                    <td>
+                        <!--a ng-href="{{location['_href']|getapproute}}">{{location.name}}</a-->
+                        <ezp-location-path pathstring="location['_href'].split('/locations')[1]+'/'"></ezp-location-path>
+                    </td>
+                    <td>{{location.childCount|i18n:'content'}}</td>
+                    <td>{{location.hidden|i18n:'content'}}</td>
+                    <td>
+                        <input type="radio" name="ismainlocation" ng-checked="location['_href'] === content.MainLocationHref" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="tab-content text-center">
+            <button class="left" ng-click="::content.showModalRemoveLocation()">{{'Remove location'|i18n:'content'}}</button>
+            <button ng-click="::content.showModalBrowseLocations('locationAdd')">{{'Add location'|i18n:'content'}}</button>
+            <button class="right" ng-click="::content.locationSetMain()">ToDo: {{'Set main location'|i18n:'content'}}</button>
+        </p>
+    </cjw-tab>
+
+    <cjw-tab name="{{'Relations'|i18n:'content'}}" id="content_view_tab_relations">
+        <table ng-if="content.Relations.Relation.length > 0">
+            <tr ng-repeat="relation in content.Relations.Relation">
+                <th>ToDo:</th>
+                <td>{{relation['_href']}}</td>
+            </tr>
+        </table>
+        <p class="tab-content" ng-if="content.Relations.Relation.length === 0">
+            {{'No relations set'|i18n:'content'}}
+        </p>
+    </cjw-tab>
+
+    <cjw-tab name="{{'Extras'|i18n:'content'}}" id="content_view_tab_extras">
+        <table>
+            <tr>
+                <th>ToDo:</th>
+                <td>Set section</td>
+            </tr>
+            <tr>
+                <th>ToDo:</th>
+                <td>Set order</td>
+            </tr>
+            <tr>
+                <th>ToDo:</th>
+                <td>Swap node</td>
+            </tr>
+        </table>
+    </cjw-tab>
+</cjw-tabset>

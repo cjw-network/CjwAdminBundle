@@ -1,0 +1,278 @@
+/* reset browser styles */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td
+{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+table, td, th { vertical-align: top; }
+
+a img { border: none; }
+
+/* GENERAL ELEMENTS */
+
+html {
+    -webkit-backface-visibility: hidden;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after { box-sizing: inherit; }
+
+body {
+    margin: 0;
+    font-size: 1rem;
+    color: #333333;
+    background-color: #fefefe;
+    font-family: "Helvetica Neue", Arial,Helvetica, sans-serif;
+    overflow-y: scroll;
+}
+body p, body li { text-overflow: ellipsis; }
+
+:root {
+  --color-red: #b12c15;
+  --color-blue: #26505E;
+}
+.color_red { color: var(--color-red); }
+/*
+.blue { color: var(--color-blue); }
+*/
+h1, h2, h3, h4, h5, h6 { font-weight: bold; color: #333333; line-height: 1.25; }
+h1 { font-size: 1.3rem; margin: 0 0 .5rem 0; }
+h2 { font-size: 1.2rem; margin: 0 0 .5rem 0; }
+h3, h4, h5, h6 { font-size: 1rem; margin: 0 0 .5rem 0; }
+
+p, td { line-height: 1.25; }
+li { line-height: 1.5; }
+p, table, pre, ul, ol { margin: 0 0 .75rem 0; }
+ul, ol { margin-left: 1.25rem; }
+
+a { color: var(--color-blue); text-decoration: none; }
+a:hover { color: var(--color-red); text-decoration: underline; }
+
+a, button, button:active, select:active { outline : none; }
+a img { outline : none; }
+
+hr, .horiz-ruler { height: 1px; background: #d1d1d1; border: none; margin-bottom:0.75rem; }
+
+.box { width: 100%; outline: none; }
+.halfbox { width: 47%; outline: none; }
+
+.break { clear: both; }
+.hide { display: none; }
+.show { display: block; }
+.right { float: right; }
+.left { float: left; }
+.inline { display: inline; }
+.pointer { cursor: pointer !important; }
+.underline { text-decoration: underline; }
+.text-center { text-align: center; }
+
+.odd { background-color: #ffffff; }
+.even { background-color: #f9f9f9; }
+
+table { width: 100%; border: 1px solid #d1d1d1; border-radius: 3px; }
+th { font-weight: bold; background-color: #f9f9f9; background: linear-gradient(to bottom, #ffffff 0%, #f9f9f9 80%); }
+td, th { padding: 0.5rem 0.75rem 0.5rem 0.75rem; }
+thead tr th { text-align: left; }
+tbody tr th { text-align: right; }
+
+.flag-icon { height: 1rem; width: auto; margin-right: 0.33rem; vertical-align: middle; }
+
+.cjw-tab-content table { border: none; margin-bottom: 0; }
+
+/* Forms */
+
+textarea { height: auto; resize: none; overflow: auto; margin: 0; }
+input, textarea {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    display: block;
+    border: 1px solid #ababab;
+    border-radius: 3px;
+    padding: 0.33rem;
+    margin-bottom: 1rem;
+}
+input:focus, textarea:focus {
+    border-color: var(--color-red);
+}
+input:hover, textarea:hover {
+    border-color: var(--color-red);
+}
+
+button { text-align: center; }
+button, select {
+/*
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+*/
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    font-size: 1rem;
+    color: var(--color-blue);
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #ababab;
+    border-radius: 3px;
+    padding: 0.33rem;
+    background-color: #ced9df;
+    background: linear-gradient(to bottom, #ffffff 0%, #f9f9f9 80%);
+    min-width: 6rem;
+}
+button:hover, select:hover {
+    opacity: 0.75;
+    color: var(--color-red);
+    border-color: var(--color-red);
+}
+button:active, select:active {
+    color: #333333;
+    border-color: var(--color-blue);
+}
+input[type="checkbox"].radio {
+    -webkit-appearance: radio; /* Chrome, Safari, Opera */
+    -moz-appearance: radio;    /* Firefox */
+    -ms-appearance: radio;     /* not currently supported */
+}
+
+/* pagelayout */
+
+#messages, #menutop {
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0;
+    vertical-align: middle;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#messages {
+    position: absolute;
+    width: 100%;
+    background-color: #ef910b;
+    color: #000000;
+    box-shadow: 0px 3px 3px 0px rgba(244,145,0,0.9);
+}
+#messages.ng-enter { transition: height 0.4s ease-out; height: 0; }
+#messages.ng-enter.ng-enter-active { height: 3rem; }
+#messages.ng-leave { transition: height 0.4s ease-out; height: 3rem; }
+#messages.ng-leave.ng-leave-active { height: 0; }
+
+#menutop {
+    background-color: #e1ebd2;
+    background-image: url("/bundles/cjwadminapp//images/logo-cjw.png");
+    background-repeat: no-repeat;
+    background-size: auto 90%;
+    background-position: 0.25rem 0.2em;
+    margin: 0 0 1rem 0;
+    font-size: 1.33rem;
+    box-shadow: 0px 3px 3px 0px rgba(225,235,210,0.9);
+}
+#menutop li {
+    display: inline;
+    padding: 0 1rem;
+}
+
+#sidebar { width: 18.5%; overflow: hidden; }
+.ng-view { border: 1px solid var(--color-red); border-radius: 3px; width: 80%; padding: 1em; }
+
+/* treemenu, leftside */
+.treemenu-depth { padding-left: 1rem; }
+
+/* tabset, tab directive */
+cjw-tabset { display: block; margin-bottom: 1rem; }
+.cjw-tabset {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ababab;
+    border-radius: 3px 3px 0 0;
+    color: var(--color-blue);
+    background-color: #ced9df;
+    background: linear-gradient(to bottom, #ffffff 0%, #f9f9f9 80%);
+}
+.cjw-tab {
+    cursor: pointer;
+    /*display: inline;*/
+    padding: 0.33rem 1rem 0.33rem 1rem;
+    border-right: 1px solid #ababab;
+    font-weight: bold;
+    display: inline-block;
+    line-height: inherit;
+/* ToDo: tab title
+    min-width: 6rem;
+    text-align: center;
+*/
+}
+.cjw-tab-content {
+    overflow: auto;
+    max-height: 25rem;
+    display: none;
+    border: 1px solid #ababab;
+    border-radius: 0 0 3px 3px;
+    border-top: none;
+}
+.cjw-tab-content p.tab-content {
+    padding: 0.5rem 0.75rem;
+}
+.cjw-tab-content.selected { display: block; }
+.cjw-tab.selected { color: var(--color-red); }
+
+/* cjw-tool-box directive */
+.cjw-tool-box {
+    background-color: #e6f1d7;
+    border: 1px solid #d0d9c2;
+    border-radius: 3px;
+    margin-bottom: 0.75rem;
+}
+.cjw-tool-box li { overflow: hidden; white-space: nowrap; }
+.cjw-tool-box .fa { margin-right: 0.5rem; }
+.cjw-tool-box-title {
+    background: linear-gradient(to bottom, #e6f1d7 0%, #d0d9c2 80%);
+    padding: 0.5rem;
+    white-space: nowrap;
+}
+.cjw-tool-box-title p { display: inline-block; margin: 0; }
+/*.cjw-tool-box-title p.fa { padding-right: 0.5rem;}*/
+.cjw-tool-box-body { padding: 0.5rem; }
+.cjw-tool-box-body ul, .cjw-tool-box-body p { margin: 0; }
+.cjw-tool-box-body ul { list-style: none; }
+
+/* modal animate */
+.modal-animate.ng-enter { transition: opacity 0.4s ease-out; opacity: 0; }
+.modal-animate.ng-enter.ng-enter-active { opacity: 1; }
+.modal-animate.ng-leave { transition: opacity 0.4s ease-out; opacity: 1; }
+.modal-animate.ng-leave.ng-leave-active { opacity: 0; }
+
+.datepicker-input { font-family: FontAwesome, "Helvetica Neue", Arial,Helvetica,sans-serif; margin-bottom: 0; }
+
+/* ng-wig */
+.nw-editor { min-height: 10rem; }
+.nw-editor__res.ng-invalid.ng-touched, .nw-editor__src.ng-invalid { border: 2px solid #FF0000 !important; }
+
+/* responsive */
+@media (max-width: 800px) {
+    .ng-view { width: 100%; float: none; }
+    #sidebar { display: none; }
+}
+/*
+http://blog.der-albert.com/2014/12/23/mediaquery-spezifische-css-klassen-mit-angularjs/
+https://github.com/AnalogJ/matchmedia-ng
+*/

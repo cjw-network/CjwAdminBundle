@@ -1,0 +1,58 @@
+<ezp-modal-layout />
+
+<form id="content-browse" class="modal-animate" ng-if="animate">
+    <div id="modal-overlay-box">
+        <h1 class="left">Browse ToDo: root nodes, up, home, searchbox, u.a.|i18n:'content'</h1>
+        <button class="right" ng-click="::close(false)">{{'Close'|i18n:'content'}}</button>
+        <button class="right" ng-click="::location.select[location.action]()">{{'Select'|i18n:'content'}}</button>
+
+        <div class="break"></div>
+
+<div ng-if="location.hasChildren" id="location-browse">
+    <h2><a href ng-click="::location.requestLink(location.parent)">{{'Up'|i18n:'content'}}</a></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>{{'Name'|i18n:'content'}}</th>
+                <th>{{'Language'|i18n:'content'}}</th>
+                <th>{{'Hidden'|i18n:'content'}}</th>
+                <!--th>{{'Invisible'|i18n:'content'}}</th-->
+                <th>{{'Section'|i18n:'content'}}</th>
+                <th>{{'Contenttype'|i18n:'content'}}</th>
+                <th>{{'Modified'|i18n:'content'}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in location.children" ng-class-odd="'odd'" ng-class-even="'even'">
+                <td>
+                    <!-- ToDo if != own -->
+                    <!--input ng-if="multiple" type="checkbox" /-->
+                    <input type="checkbox" ng-model="item.selected" ng-click="::location.setLocationSelection($index)" ng-class="{'radio': !location.multi}" />
+                </td>
+                <td>
+                    <a ng-if="item.childCount" href ng-click="::location.requestLink({'_href':item.Children['_href'],'_media-type':item.Children['_media-type']})">
+                        {{item.name}}
+                    </a>
+                    <span ng-if="!item.childCount">{{item.name}}</span>
+                </td>
+                <td>
+                    <img class="flag-icon" ng-src="{{::location.pathAssets}}/images/flags/{{laguageCode}}.gif" ng-repeat="laguageCode in ::location.getLanguageCodes(item.languageCodes)" />
+                </td>
+                <td>{{item.hidden}}</td>
+                <!--td>{{item.invisible}}</td-->
+                <td>{{item.sectionId|sectionname}}</td>
+                <td>{{item.contentType|contenttypename}}</td>
+                <td>{{item.modificationDate|date:short}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+        <button class="right" ng-click="::close(false)">{{'Close'|i18n:'content'}}</button>
+        <button class="right" ng-click="::location.select[location.action]()">{{'Select'|i18n:'content'}}</button>
+
+        <div class="break"></div>
+    </div>
+    <div ng-click="::close(false)" id="modal-overlay-fade"></div>
+</form>

@@ -1,0 +1,36 @@
+services:
+    cjwadminapp.value_object_visitor.RestLocation:
+        parent: ezpublish_rest.output.value_object_visitor.base
+        class: Cjw\AdminAppBundle\Rest\ValueObjectVisitor\RestLocation
+        tags:
+            - { name: ezpublish_rest.output.value_object_visitor, type: Cjw\AdminAppBundle\Rest\Values\RestLocation }
+
+    cjwadminapp.value_object_visitor.LocationList:
+        parent: ezpublish_rest.output.value_object_visitor.base
+        class: Cjw\AdminAppBundle\Rest\ValueObjectVisitor\LocationList
+        arguments:
+            - @ezpublish.api.service.content
+        tags:
+            - { name: ezpublish_rest.output.value_object_visitor, type: Cjw\AdminAppBundle\Rest\Values\LocationList }
+
+#    cjwadminapp.value_object_visitor.ContentSearch:
+#        parent: ezpublish_rest.output.value_object_visitor.base
+#        class: Cjw\AdminAppBundle\Rest\ValueObjectVisitor\ContentSearch
+#        arguments:
+#            - @ezpublish.api.service.content
+#        tags:
+#            - { name: ezpublish_rest.output.value_object_visitor, type: Cjw\AdminAppBundle\Rest\Values\ContentSearch }
+
+    cjwadminapp.value_object_visitor.RestContent:
+        parent: ezpublish_rest.output.value_object_visitor.base
+        class: Cjw\AdminAppBundle\Rest\ValueObjectVisitor\RestContent
+        tags:
+            - { name: ezpublish_rest.output.value_object_visitor, type: Cjw\AdminAppBundle\Rest\Values\RestContent }
+
+    cjwadminapp.value_object_visitor.Version:
+        parent: ezpublish_rest.output.value_object_visitor.base
+        class: Cjw\AdminAppBundle\Rest\ValueObjectVisitor\Version
+        tags:
+            - { name: ezpublish_rest.output.value_object_visitor, type: Cjw\AdminAppBundle\Rest\Values\Version }
+        arguments:
+            - @ezpublish_rest.field_type_serializer

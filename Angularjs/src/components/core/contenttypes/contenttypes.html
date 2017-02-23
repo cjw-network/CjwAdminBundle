@@ -1,0 +1,46 @@
+<button class="right" ng-click="::contenttypes.showModalCreate()">{{'Create'|i18n:'contenttypes'}}</button>
+<select class="right">
+    <option value="eng-GB" selected>eng-GB (ToDo!)</option>
+</select>
+<select class="right">
+    <option value="{{::contenttypes.groupId|contenttypegroupename}}" selected>{{::contenttypes.groupId|contenttypegroupename}} (ToDo!)</option>
+</select>
+
+<h1>
+    {{'Contenttypes'|i18n:'contenttypes'}}
+    <span ng-if="::contenttypes.groupId">{{'in group'|i18n:'contenttypes'}} {{::contenttypes.groupId|contenttypegroupename}}</span>
+</h1>
+
+<div class="break"></div>
+<p></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>{{'Name'|i18n:'contenttypes'}}</th>
+            <th>{{'Id'|i18n:'contenttypes'}}</th>
+            <th>{{'Identifier'|i18n:'contenttypes'}}</th>
+            <th>{{'Modified'|i18n:'contenttypes'}}</th>
+            <!--th>{{'Description'|i18n:'contenttypes'}}</th-->
+            <th>{{'Actions'|i18n:'contenttypes'}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="contenttype in ::contenttypes.list" ng-class-odd="'odd'" ng-class-even="'even'">
+            <td>
+                <a ng-href="{{::contenttypes.pathPrefix}}/contenttypes/type/{{::contenttype.id}}">
+                    {{::contenttype.names.value|translatevalue}}
+                </a>
+            </td>
+            <td>{{::contenttype.id}}</td>
+            <td>{{::contenttype.identifier}}</td>
+            <td>{{::contenttype.modificationDate}}</td>
+            <!--td>{{::contenttype.descriptions.value|translatevalue}}</td-->
+            <td style="white-space: nowrap">
+                <span class="pointer fa fa-pencil-square-o fa-lg fa-fw" ng-click="::contenttypeGroups.editGroup(key)"></span>
+                <span class="pointer fa fa-files-o fa-lg fa-fw" ng-click="::contenttypeGroups.removeGroup(key)"></span>
+                <span class="pointer fa fa-times fa-lg fa-fw" ng-click="::contenttypeGroups.removeGroup(key)"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
